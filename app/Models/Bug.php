@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Support\Arr;
 
 class Bug
@@ -14,12 +15,15 @@ class Bug
 
     private string $description;
 
+    private DateTime $dateCreated;
+
     public function __construct(int $id, string $priority, string $status, string $description)
     {
         $this->id = $id;
         $this->priority = $priority;
         $this->status = $status;
         $this->description = $description;
+        $this->dateCreated = new DateTime();
     }
 
     public function getID(): int
