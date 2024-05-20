@@ -69,7 +69,7 @@ class Bug
         });
 
         if (! $bug) {
-            abort(code: 404, message: "No Bug Found with ID: $id");
+            abort(code: 404);
         }
 
         return $bug;
