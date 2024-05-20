@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Arr;
+use App\Models\Bug;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,42 +8,20 @@ Route::get('/', function () {
 });
 
 Route::get('/bugs', function () {
+    $bugs = Bug::getMockBugList();
+
     return view('bugs', [
-        'bugs' => [
-            [
-                'id' => 1,
-                'status' => 'Investigating',
-                'description' => 'a bug',
-            ],
-            [
-                'id' => 2,
-                'status' => 'Fixed',
-                'description' => 'another bug',
-            ],
-        ],
+        'bugs' => $bugs,
     ]);
 });
 
-Route::get('/bug/{id}', function ($id) {
-    $bugs = [
-        [
-            'id' => 1,
-            'status' => 'Investigating',
-            'description' => 'a bug',
-        ],
-        [
-            'id' => 2,
-            'status' => 'Fixed',
-            'description' => 'another bug',
-        ],
-    ];
+Route::get('/bug/{id}', function (int $id) {
+    $bugs = Bug::getMockBugList();
 
-    $bug = Arr::first($bugs, function ($bug) use ($id) {
-        return $bug['id'] == $id;
-    });
+    $bug = Bug::findBug($bugs, $id);
 
     return view('bug', ['bug' => $bug]);
-});
+})->where('id', '[0-9]+');
 
 Route::get('/about', function () {
     return view('about');
