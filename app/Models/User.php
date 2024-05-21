@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -43,5 +44,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function assigned_bugs(): HasMany
+    {
+        return $this->hasMany(Bug::class, foreignKey: 'assigned_staff_id');
+    }
+
+    public function reported_bugs(): HasMany
+    {
+        return $this->hasMany(Bug::class, foreignKey: 'reporter_id');
+    }
+
+    public function received_messages(): HasMany
+    {
+        return $this->hasMany(Message::class, foreignKey: 'receiver_id');
+    }
+
+    public function sent_messages(): HasMany
+    {
+        return $this->hasMany(Message::class, foreignKey: 'sender_id');
     }
 }
