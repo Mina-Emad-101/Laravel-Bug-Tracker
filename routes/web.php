@@ -8,7 +8,7 @@ Route::get('/', function () {
 });
 
 Route::get('/bugs', function () {
-    $bugs = Bug::getMockBugList();
+    $bugs = Bug::all();
 
     return view('bugs', [
         'bugs' => $bugs,
@@ -16,12 +16,18 @@ Route::get('/bugs', function () {
 });
 
 Route::get('/bug/{id}', function (int $id) {
-    $bugs = Bug::getMockBugList();
+    $bug = Bug::find($id);
 
-    $bug = Bug::findBug($bugs, $id);
+    if (! $bug) {
+        abort(404);
+    }
 
     return view('bug', ['bug' => $bug]);
 })->where('id', '[0-9]+');
+
+Route::get('/report-bug', function () {
+    return view('report-bug');
+});
 
 Route::get('/about', function () {
     return view('about');

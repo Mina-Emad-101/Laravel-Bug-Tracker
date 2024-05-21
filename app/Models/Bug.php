@@ -2,76 +2,41 @@
 
 namespace App\Models;
 
-use DateTime;
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Bug
+class Bug extends Model
 {
-    private int $id;
+    use HasFactory;
 
-    private string $priority;
+    public $timestamps = false;
 
-    private string $status;
+    protected $fillable = [
+        'priority_id',
+        'status_id',
+        'description',
+        'assigned_staff_id',
+        'reporter_id',
+    ];
 
-    private string $description;
-
-    private DateTime $dateCreated;
-
-    public function __construct(int $id, string $priority, string $status, string $description)
+    public function priority(): BelongsTo
     {
-        $this->id = $id;
-        $this->priority = $priority;
-        $this->status = $status;
-        $this->description = $description;
-        $this->dateCreated = new DateTime();
+        return $this->belongsTo(Priority::class);
     }
 
-    public function getID(): int
+    public function status(): BelongsTo
     {
-        return $this->id;
+        return $this->belongsTo(Status::class);
     }
 
-    public function getPriority(): string
+    public function assigned_staff(): BelongsTo
     {
-        return $this->priority;
+        return $this->belongsTo(User::class);
     }
 
-    public function getStatus(): string
+    public function reporter(): BelongsTo
     {
-        return $this->status;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @return array<Bug>
-     */
-    public static function getMockBugList(): array
-    {
-        $bugs = [
-            new Bug(id: 1, priority: 'High', status: 'Pending', description: 'First Bug'),
-            new Bug(id: 2, priority: 'Medium', status: 'Investigating', description: 'Second Bug'),
-        ];
-
-        return $bugs;
-    }
-
-    /**
-     * @param  array<Bug>  $bugsArray
-     */
-    public static function findBug(array $bugsArray, int $id): Bug
-    {
-        $bug = Arr::first($bugsArray, function ($bug) use ($id) {
-            return $bug->getID() == $id;
-        });
-
-        if (! $bug) {
-            abort(code: 404);
-        }
-
-        return $bug;
+        return $this->belongsTo(User::class);
     }
 }
