@@ -8,7 +8,7 @@ Route::get('/', function () {
 });
 
 Route::get('/bugs', function () {
-    $bugs = Bug::all();
+    $bugs = Bug::all()->sort();
 
     return view('bugs', [
         'bugs' => $bugs,
