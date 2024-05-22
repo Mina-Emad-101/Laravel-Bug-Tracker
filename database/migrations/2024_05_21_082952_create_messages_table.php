@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class, 'sender_id');
-            $table->foreignIdFor(User::class, 'receiver_id');
-            $table->foreignIdFor(Bug::class, 'bug_id');
+            $table->foreignIdFor(User::class, 'sender_id')->nullable(true)->constrained('users')->nullOnDelete();
+            $table->foreignIdFor(User::class, 'receiver_id')->nullable(true)->constrained('users')->nullOnDelete();
+            $table->foreignIdFor(Bug::class, 'bug_id')->constrained()->cascadeOnDelete();
             $table->text('content');
             $table->timestamp('created_at');
         });
