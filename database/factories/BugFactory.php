@@ -23,8 +23,8 @@ class BugFactory extends Factory
             'priority_id' => Priority::all()->random(),
             'status_id' => Status::all()->random(),
             'description' => fake()->text(255),
-            'assigned_staff_id' => User::factory(),
-            'reporter_id' => User::factory(),
+            'assigned_staff_id' => User::factory()->staff(),
+            'reporter_id' => User::factory()->customer(),
             'created_at' => now(),
         ];
     }

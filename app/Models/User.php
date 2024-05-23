@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -28,6 +29,10 @@ use Illuminate\Notifications\Notifiable;
  * @property-read int|null $received_messages_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Bug> $reported_bugs
  * @property-read int|null $reported_bugs_count
+<<<<<<< HEAD
+=======
+ * @property-read \App\Models\Role $role
+>>>>>>> roles
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Message> $sent_messages
  * @property-read int|null $sent_messages_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
@@ -58,6 +63,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -81,6 +87,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
     }
 
     public function assigned_bugs(): HasMany

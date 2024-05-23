@@ -10,6 +10,10 @@
         "laravel/tinker": "^2.9"
     },
     "require-dev": {
+<<<<<<< HEAD
+=======
+        "barryvdh/laravel-debugbar": "^3.13",
+>>>>>>> roles
         "barryvdh/laravel-ide-helper": "^3.0",
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",

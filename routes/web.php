@@ -8,7 +8,7 @@ Route::get('/', function () {
 });
 
 Route::get('/bugs', function () {
-    $bugs = Bug::all();
+    $bugs = Bug::with(['priority', 'status'])->get()->sortBy('priority_id')->sortBy('status_id');
 
     return view('bugs', [
         'bugs' => $bugs,

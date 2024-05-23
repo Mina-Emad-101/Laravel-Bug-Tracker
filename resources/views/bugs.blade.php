@@ -1,20 +1,24 @@
 <x-layout>
   <x-header>Bugs</x-header>
   <x-main>
-    <ul>
+    <div class="w-full grid grid-cols-5 gap-5">
       @foreach ($bugs as $bug)
-        <li><strong>ID:</strong> <a href="/bug/{{ $bug->id }}">{{ $bug->id }}</a></li>
-        <li><strong>Priority:</strong> {{ $bug->priority->name }}</li>
-        <li><strong>Status:</strong> {{ $bug->status->name }}</li>
-        <li><strong>Description:</strong> {{ $bug->description }}</li>
-        <li><strong>Assigned Staff:</strong> {{ $bug->assigned_staff->name }}</li>
-        <li><strong>Reporter:</strong> {{ $bug->reporter->name }}</li>
-        @for ($i = 0; $i < 30; $i++)
-          {{ '-' }}
-        @endfor
-        <br>
-        <br>
+        <div class="text-center text-2xl p-5 border-2 border-gray-800 rounded-lg hover:bg-gray-800 hover:text-gray-300">
+          <a href="/bug/{{ $bug->id }}">
+            <div class="pb-5 text-3xl"><strong>Bug #{{ $bug->id }}</strong></div>
+
+            @if ($bug->priority->name == 'High')
+            <div class="pb-3"><strong>Priority:</strong><br><p class="text-red-500">{{ $bug->priority->name }}</p></div>
+            @elseif ($bug->priority->name == 'Medium')
+            <div class="pb-3"><strong>Priority:</strong><br><p class="text-orange-500">{{ $bug->priority->name }}</p></div>
+            @else
+            <div class="pb-3"><strong>Priority:</strong><br><p class="text-lime-500">{{ $bug->priority->name }}</p></div>
+            @endif
+
+            <div class="pb-3"><strong>Status:</strong><br>{{ $bug->status->name }}</div>
+          </a>
+        </div>
       @endforeach
-    </ul>
+    </div>
   </x-main>
 </x-layout>
