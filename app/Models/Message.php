@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
- *
  * @property int $id
  * @property int|null $sender_id
  * @property int|null $receiver_id
@@ -18,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read \App\Models\Bug $bug
  * @property-read \App\Models\User|null $receiver
  * @property-read \App\Models\User|null $sender
+ *
  * @method static \Database\Factories\MessageFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Message newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Message newQuery()
@@ -28,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereReceiverId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereSenderId($value)
+ *
  * @mixin \Eloquent
  */
 class Message extends Model

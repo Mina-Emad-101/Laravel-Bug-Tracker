@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
- *
  * @property int $id
  * @property int $priority_id
  * @property int $status_id
@@ -23,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \App\Models\Priority $priority
  * @property-read \App\Models\User|null $reporter
  * @property-read \App\Models\Status $status
+ *
  * @method static \Database\Factories\BugFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Bug newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Bug newQuery()
@@ -34,6 +33,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Bug wherePriorityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bug whereReporterId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Bug whereStatusId($value)
+ *
  * @mixin \Eloquent
  */
 class Bug extends Model

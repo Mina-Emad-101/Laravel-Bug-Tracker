@@ -10,8 +10,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -29,12 +27,10 @@ use Illuminate\Notifications\Notifiable;
  * @property-read int|null $received_messages_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Bug> $reported_bugs
  * @property-read int|null $reported_bugs_count
-<<<<<<< HEAD
-=======
  * @property-read \App\Models\Role $role
->>>>>>> roles
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Message> $sent_messages
  * @property-read int|null $sent_messages_count
+ *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -48,6 +44,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable
