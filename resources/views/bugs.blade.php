@@ -8,17 +8,20 @@
             <div class="pb-5 text-3xl"><strong>Bug #{{ $bug->id }}</strong></div>
 
             @if ($bug->priority->name == 'High')
-            <div class="pb-3"><strong>Priority:</strong><br><p class="text-red-500">{{ $bug->priority->name }}</p></div>
+              <div class="pb-3"><strong>Priority:</strong><br><p class="text-red-500">{{ $bug->priority->name }}</p></div>
             @elseif ($bug->priority->name == 'Medium')
-            <div class="pb-3"><strong>Priority:</strong><br><p class="text-orange-500">{{ $bug->priority->name }}</p></div>
+              <div class="pb-3"><strong>Priority:</strong><br><p class="text-orange-500">{{ $bug->priority->name }}</p></div>
             @else
-            <div class="pb-3"><strong>Priority:</strong><br><p class="text-lime-500">{{ $bug->priority->name }}</p></div>
+              <div class="pb-3"><strong>Priority:</strong><br><p class="text-lime-500">{{ $bug->priority->name }}</p></div>
             @endif
 
             <div class="pb-3"><strong>Status:</strong><br>{{ $bug->status->name }}</div>
           </a>
         </div>
       @endforeach
+    </div>
+    <div class="pt-28">
+      {{ $bugs->links() }}
     </div>
   </x-main>
 </x-layout>
