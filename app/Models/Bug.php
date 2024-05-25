@@ -48,6 +48,7 @@ class Bug extends Model
         'description',
         'assigned_staff_id',
         'reporter_id',
+        'screenshot',
     ];
 
     public function priority(): BelongsTo

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('description');
             $table->foreignIdFor(User::class, 'assigned_staff_id')->nullable(true)->constrained('users')->nullOnDelete();
             $table->foreignIdFor(User::class, 'reporter_id')->nullable(true)->constrained('users')->nullOnDelete();
+            $table->string('screenshot');
             $table->timestamp('created_at');
         });
     }

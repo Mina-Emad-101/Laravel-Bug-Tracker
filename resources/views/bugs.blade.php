@@ -1,9 +1,9 @@
 <x-layout>
   <x-header>Bugs</x-header>
   <x-main>
-    <div class="w-full grid grid-cols-5 gap-5">
+    <div class="w-full grid grid-cols-2 md:grid-cols-5 gap-5">
       @foreach ($bugs as $bug)
-        <div class="text-center text-2xl p-5 border-2 border-gray-800 rounded-lg hover:bg-gray-800 hover:text-gray-300">
+        <div class="text-center text-lg md:text-2xl p-5 border-2 border-gray-800 rounded-lg hover:bg-gray-800 hover:text-gray-300">
           <a href="/bug/{{ $bug->id }}">
             <div class="pb-5 text-3xl"><strong>Bug #{{ $bug->id }}</strong></div>
 

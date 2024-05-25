@@ -15,6 +15,10 @@
         <p class="pl-5 w-3/4">{{ $bug->description }}</p>
       </div>
       <div>
+        <strong>Screenshot:</strong>
+        <img class="pl-5 w-1/2" src="{{ asset('storage/'.$bug->screenshot) }}">
+      </div>
+      <div>
         <strong>Assigned Staff:</strong>
         <p class="pl-5">{{ $bug->assigned_staff->name }}</p>
       </div>

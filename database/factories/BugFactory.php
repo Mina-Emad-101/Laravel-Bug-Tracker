@@ -6,6 +6,7 @@ use App\Models\Priority;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Bug>
@@ -25,6 +26,10 @@ class BugFactory extends Factory
             'description' => fake()->text(255),
             'assigned_staff_id' => User::where('role_id', 2)->get()->random(),
             'reporter_id' => User::where('role_id', 3)->get()->random(),
+            'screenshot' => collect(Storage::disk('public')->files())
+                ->filter(fn ($value, $key) => str_contains($value, '.png') ||
+                        str_contains($value, '.jpg')
+                )->random(),
             'created_at' => now(),
         ];
     }
