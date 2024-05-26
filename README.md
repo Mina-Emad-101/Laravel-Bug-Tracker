@@ -7,8 +7,7 @@
 #### I am still working on it, as I'm using this project as a way to learn Laravel, So I'm taking it step-by-step :) 
 #### feel free to take a look at the code!
 
-
-
+<br>
 
 ## Front-End: HTML and CSS ( With Tailwind CSS )
 ## Back-End: PHP, Laravel and MySQL
