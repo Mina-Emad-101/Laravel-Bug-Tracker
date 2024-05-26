@@ -8,8 +8,10 @@
 #### feel free to take a look at the code!
 
 
-### Front-End: HTML and CSS ( With Tailwind CSS )
-### Back-End: PHP, Laravel and MySQL
+
+
+## Front-End: HTML and CSS ( With Tailwind CSS )
+## Back-End: PHP, Laravel and MySQL
 
 <br>
 
