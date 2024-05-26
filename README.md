@@ -28,8 +28,8 @@
 #### Customer
 <ul>
 	<li>Log into the App</li>
-	<li>Send Bug Details raised from their Software to Administrator Including Screenshot ( Implemented )</li>
-	<li>Monitor Bug's Case-Flow Details ( Implemented )</li>
+	<li>Send Bug Details raised from their Software to Administrator Including Screenshot ( Implemented ✅ )</li>
+	<li>Monitor Bug's Case-Flow Details ( Implemented ✅ )</li>
 </ul>
 
 #### Administrator
@@ -37,16 +37,16 @@
 	<li>Log into the App</li>
 	<li>Add Administrators and Staff Members Accounts to App</li>
 	<li>Add Projects to App</li>
-	<li>View Bugs sent from Customers ( Implemented )</li>
+	<li>View Bugs sent from Customers ( Implemented ✅ )</li>
 	<li>Assign Bugs to Staff Members</li>
-	<li>Monitor Bug's Case-Flow Details ( Implemented )</li>
+	<li>Monitor Bug's Case-Flow Details ( Implemented ✅ )</li>
 </ul>
 
 #### Staff Member
 <ul>
 	<li>Log into the App</li>
-	<li>View Bugs Assigned to Them ( Implemented )</li>
-	<li>Monitor Bug's Case-Flow Details ( Implemented )</li>
+	<li>View Bugs Assigned to Them ( Implemented ✅ )</li>
+	<li>Monitor Bug's Case-Flow Details ( Implemented ✅ )</li>
 	<li>Send Solution Message to Customer regarding their Bug</li>
 </ul>
 
