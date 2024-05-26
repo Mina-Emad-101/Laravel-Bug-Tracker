@@ -10,7 +10,7 @@
 <br>
 
 ## Front-End: HTML and CSS ( With Tailwind CSS )
-## Back-End: PHP, Laravel and MySQL
+## Back-End: PHP, Laravel and SQLite
 
 <br>
 
