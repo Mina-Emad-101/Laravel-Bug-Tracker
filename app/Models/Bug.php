@@ -43,6 +43,7 @@ class Bug extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'project_id',
         'priority_id',
         'status_id',
         'description',
@@ -50,6 +51,11 @@ class Bug extends Model
         'reporter_id',
         'screenshot',
     ];
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
 
     public function priority(): BelongsTo
     {

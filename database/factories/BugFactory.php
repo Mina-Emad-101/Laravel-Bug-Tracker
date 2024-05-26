@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Priority;
+use App\Models\Project;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,6 +22,7 @@ class BugFactory extends Factory
     public function definition(): array
     {
         return [
+            'project_id' => Project::all()->random(),
             'priority_id' => Priority::all()->random(),
             'status_id' => Status::all()->random(),
             'description' => fake()->text(255),

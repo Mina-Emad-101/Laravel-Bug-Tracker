@@ -15,6 +15,12 @@ Route::get('/bugs', function () {
     ]);
 });
 
+Route::post('/bugs', function () {
+    $newBug = new Bug;
+
+    return redirect('/bugs');
+});
+
 Route::get('/bugs/{id}', function (int $id) {
     $bug = Bug::find($id);
 

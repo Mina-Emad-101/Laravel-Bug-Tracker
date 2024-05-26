@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Priority;
+use App\Models\Project;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -16,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('bugs', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Project::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Priority::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Status::class)->constrained()->cascadeOnDelete();
             $table->string('description');
