@@ -21,12 +21,14 @@ class BugFactory extends Factory
      */
     public function definition(): array
     {
+        $status = Status::all()->random();
+
         return [
             'project_id' => Project::all()->random(),
-            'priority_id' => Priority::all()->random(),
-            'status_id' => Status::all()->random(),
+            'priority_id' => $status->id == 1 ? null : Priority::all()->random(),
+            'status_id' => $status,
             'description' => fake()->text(255),
-            'assigned_staff_id' => User::where('role_id', 2)->get()->random(),
+            'assigned_staff_id' => $status->id == 1 ? null : User::where('role_id', 2)->get()->random(),
             'reporter_id' => User::where('role_id', 3)->get()->random(),
             'screenshot' => collect(Storage::disk('public')->files())
                 ->filter(fn ($value, $key) => str_contains($value, '.png') ||

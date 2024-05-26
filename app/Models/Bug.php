@@ -50,6 +50,7 @@ class Bug extends Model
         'assigned_staff_id',
         'reporter_id',
         'screenshot',
+        'created_at',
     ];
 
     public function project(): BelongsTo

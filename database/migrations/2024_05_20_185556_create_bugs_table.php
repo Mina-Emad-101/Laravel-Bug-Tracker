@@ -18,11 +18,11 @@ return new class extends Migration
         Schema::create('bugs', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Project::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Priority::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Priority::class)->nullable(true)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Status::class)->constrained()->cascadeOnDelete();
-            $table->string('description');
+            $table->text('description');
             $table->foreignIdFor(User::class, 'assigned_staff_id')->nullable(true)->constrained('users')->nullOnDelete();
-            $table->foreignIdFor(User::class, 'reporter_id')->nullable(true)->constrained('users')->nullOnDelete();
+            $table->foreignIdFor(User::class, 'reporter_id')->constrained('users')->nullOnDelete();
             $table->string('screenshot');
             $table->timestamp('created_at');
         });

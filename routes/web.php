@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Bug;
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,7 +9,7 @@ Route::get('/', function () {
 });
 
 Route::get('/bugs', function () {
-    $bugs = Bug::with(['priority', 'status'])->orderBy('status_id')->orderBy('priority_id')->paginate(perPage: 15);
+    $bugs = Bug::with(['project', 'priority', 'status'])->latest()->orderBy('status_id')->orderBy('priority_id')->paginate(perPage: 12);
 
     return view('bugs.index', [
         'bugs' => $bugs,
@@ -16,9 +17,22 @@ Route::get('/bugs', function () {
 });
 
 Route::post('/bugs', function () {
-    $newBug = new Bug;
+    request()->validate([
+        'project' => ['required'],
+        'description' => ['required', 'max:255'],
+        'screenshot' => ['required', 'image'],
+    ]);
 
-    return redirect('/bugs');
+    $newBug = Bug::create([
+        'project_id' => request('project'),
+        'status_id' => 1,
+        'description' => request('description'),
+        'reporter_id' => request('reporter'),
+        'screenshot' => request()->file('screenshot')->store('screenshots', 'public'),
+        'created_at' => now(),
+    ]);
+
+    return redirect('/bugs/'.$newBug->id);
 });
 
 Route::get('/bugs/{id}', function (int $id) {
@@ -32,7 +46,7 @@ Route::get('/bugs/{id}', function (int $id) {
 })->where('id', '[0-9]+');
 
 Route::get('/bugs/create', function () {
-    return view('bugs.create');
+    return view('bugs.create', ['projects' => Project::all()]);
 });
 
 Route::get('/about', function () {
