@@ -1,7 +1,7 @@
 <x-layout>
   <x-header>Bug #{{ $bug->id }}</x-header>
   <x-main>
-    <div class="text-2xl space-y-6">
+    <div class="text-2xl space-y-6 ml-5">
       <div>
         <strong>Priority:</strong>
         <p class="pl-5">{{ $bug->priority->name }}</p>
