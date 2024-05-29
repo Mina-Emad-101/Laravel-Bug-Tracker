@@ -6,6 +6,7 @@
                 <a class="contents" href="/bugs/{{ $bug->id }}">
                     <div
                         class="grid grid-cols-1 auto-rows-auto justify-center text-center text-lg lg:text-2xl p-5 border-2 border-gray-800 rounded-lg hover:bg-gray-800 hover:text-gray-300">
+
                         <div class="pb-5 text-2xl lg:text-3xl "><strong>Bug #{{ $bug->id }}</strong></div>
 
                         <div class="pb-3"><strong>Project:</strong><br>{{ $bug->project->name }}</div>
@@ -31,6 +32,13 @@
                         @endif
 
                         <div class="pb-3 self-end "><strong>Status:</strong><br>{{ $bug->status->name }}</div>
+
+                        <div>
+                            <a class="w-1/2 font-bold text-lg lg:text-2xl  border-2 border-red-700 hover:border-white rounded-lg bg-white hover:bg-red-700 text-red-700 hover:text-white"
+                                href="/bugs/{{ $bug->id }}/delete">
+                                Delete
+                            </a>
+                        </div>
                     </div>
                 </a>
             @endforeach
