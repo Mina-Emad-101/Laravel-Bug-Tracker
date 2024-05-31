@@ -30,6 +30,7 @@
 	<li>Log into the App</li>
 	<li>Send Bug Details raised from their Software to Administrator Including Screenshot ( ✅ )</li>
 	<li>Monitor Bug's Case-Flow Details ( ✅ )</li>
+	<li>Delete Their Bug ( ✅ )</li>
 </ul>
 
 #### Administrator
