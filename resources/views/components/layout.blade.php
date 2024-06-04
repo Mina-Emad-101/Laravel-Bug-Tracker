@@ -27,10 +27,10 @@
                 <div class="flex items-center max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16">
                     <div class="ml-3 flex items-baseline space-x-4 block">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        @auth
+                        @guest
                             <x-nav-link href="/login" :active="request()->is('login')">Login</x-nav-link>
                             <x-nav-link href="/register" :active="request()->is('register')">Register</x-nav-link>
-                        @endauth
+                        @endguest
                     </div>
                 </div>
             </div>

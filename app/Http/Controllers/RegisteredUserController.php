@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 class RegisteredUserController extends Controller
@@ -14,9 +15,8 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-    public function store(): Redirector|RedirectResponse
+    public function store(Request $request): Redirector|RedirectResponse
     {
-        $request = request();
         $user = new User;
         $user->name = $request->get('name');
         $user->email = $request->get('email');

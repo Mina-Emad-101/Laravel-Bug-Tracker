@@ -1,7 +1,7 @@
 <x-layout>
     <x-header>Create New Account</x-header>
     <x-main>
-        <x-form class="mx-2" action="/auth" enctype="multipart/form-data" method="POST">
+        <x-form class="mx-2" action="/register" enctype="multipart/form-data" method="POST">
 
             <x-form-element name="name">
                 <input class="p-1.5 rounded-lg" type="text" id="name" name="name" placeholder="My Username"
