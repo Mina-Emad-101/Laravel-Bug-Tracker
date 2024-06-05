@@ -15,8 +15,12 @@ class BugController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(): View|Redirector|RedirectResponse
     {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
         $bugs = Bug::with(['project', 'priority', 'status'])->latest()->orderBy('status_id')->orderBy('priority_id');
 
         if (Auth::user()->role_id == 1) {
@@ -39,6 +43,8 @@ class BugController extends Controller
      */
     public function create(): View
     {
+        Auth::user()->can('create-bug');
+
         return view('bugs.create', ['projects' => Project::all()]);
     }
 
@@ -47,6 +53,8 @@ class BugController extends Controller
      */
     public function store(Request $request): Redirector|RedirectResponse
     {
+        Auth::user()->can('create-bug');
+
         $request->validate([
             'project' => ['required'],
             'description' => ['required', 'max:255'],
@@ -70,6 +78,8 @@ class BugController extends Controller
      */
     public function show(Bug $bug): View
     {
+        Auth::user()->can('show-bug', $bug);
+
         return view('bugs.show', ['bug' => $bug]);
     }
 
@@ -78,7 +88,8 @@ class BugController extends Controller
      */
     public function edit(Bug $bug): void
     {
-        //
+        Auth::user()->can('edit-bug', $bug);
+
     }
 
     /**
@@ -86,7 +97,7 @@ class BugController extends Controller
      */
     public function update(Request $request, Bug $bug): void
     {
-        //
+        Auth::user()->can('edit-bug', $bug);
     }
 
     /**
@@ -94,6 +105,8 @@ class BugController extends Controller
      */
     public function destroy(Bug $bug): Redirector|RedirectResponse
     {
+        Auth::user()->can('destroy-bug', $bug);
+
         $bug->delete();
 
         return redirect(to: '/bugs');
