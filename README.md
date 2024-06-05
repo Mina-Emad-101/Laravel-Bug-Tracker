@@ -27,7 +27,8 @@
 
 #### Customer
 <ul>
-	<li>Log into the App</li>
+	<li>Register Account ( ✅ )</li>
+	<li>Log into the App ( ✅ )</li>
 	<li>Send Bug Details raised from their Software to Administrator Including Screenshot ( ✅ )</li>
 	<li>Monitor Bug's Case-Flow Details ( ✅ )</li>
 	<li>Delete Their Bug ( ✅ )</li>
@@ -35,7 +36,7 @@
 
 #### Administrator
 <ul>
-	<li>Log into the App</li>
+	<li>Log into the App ( ✅ )</li>
 	<li>Add Administrators and Staff Members Accounts to App</li>
 	<li>Add Projects to App</li>
 	<li>View Bugs sent from Customers ( ✅ )</li>
@@ -45,7 +46,7 @@
 
 #### Staff Member
 <ul>
-	<li>Log into the App</li>
+	<li>Log into the App ( ✅ )</li>
 	<li>View Bugs Assigned to Them ( ✅ )</li>
 	<li>Monitor Bug's Case-Flow Details ( ✅ )</li>
 	<li>Send Solution Message to Customer regarding their Bug</li>
