@@ -20,7 +20,9 @@
                     <div class="ml-3 flex items-baseline space-x-4 block">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-                        <x-nav-link href="/bugs" :active="request()->is('bugs')">Bugs</x-nav-link>
+                        @auth
+                            <x-nav-link href="/bugs" :active="request()->is('bugs')">Bugs</x-nav-link>
+                        @endauth
                         <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
                     </div>
                 </div>
@@ -31,6 +33,14 @@
                             <x-nav-link href="/login" :active="request()->is('login')">Login</x-nav-link>
                             <x-nav-link href="/register" :active="request()->is('register')">Register</x-nav-link>
                         @endguest
+                        @auth
+                            <form class="contents" action="/logout" method="POST">
+                                @csrf
+                                <button
+                                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                                    type="submit">Logout</button>
+                            </form>
+                        @endauth
                     </div>
                 </div>
             </div>

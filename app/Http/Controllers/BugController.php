@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 
 class BugController extends Controller
 {
@@ -16,7 +17,17 @@ class BugController extends Controller
      */
     public function index(): View
     {
-        $bugs = Bug::with(['project', 'priority', 'status'])->latest()->orderBy('status_id')->orderBy('priority_id')->paginate(perPage: 12);
+        $bugs = Bug::with(['project', 'priority', 'status'])->latest()->orderBy('status_id')->orderBy('priority_id');
+
+        if (Auth::user()->role_id == 1) {
+            $bugs = $bugs->where(['status_id' => 1]);
+        } elseif (Auth::user()->role_id == 2) {
+            $bugs = $bugs->where(['assigned_staff_id' => Auth::user()->id]);
+        } elseif (Auth::user()->role_id == 3) {
+            $bugs = $bugs->where(['reporter_id' => Auth::user()->id]);
+        }
+
+        $bugs = $bugs->paginate(perPage: 12);
 
         return view('bugs.index', [
             'bugs' => $bugs,

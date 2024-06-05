@@ -46,7 +46,7 @@
             </x-form-element>
 
 
-            <input type="hidden" name="reporter" value="4">
+            <input type="hidden" name="reporter" value="{{ Auth::user()->id }}">
 
             <div class="flex items-center justify-end gap-x-6">
                 <a href="/bugs" class="text-sm font-semibold text-gray-900">Cancel</a>

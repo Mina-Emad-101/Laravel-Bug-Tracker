@@ -1,7 +1,7 @@
 <x-layout>
     <x-header>Login</x-header>
     <x-main>
-        <x-form class="mx-2" action="/auth" enctype="multipart/form-data" method="POST">
+        <x-form class="mx-2" action="/login" enctype="multipart/form-data" method="POST">
 
             <x-form-element name="email">
                 <input class="p-1.5 rounded-lg" type="email" id="email" name="email" placeholder="example@domain.com"
