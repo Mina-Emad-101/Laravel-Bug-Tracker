@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AccountCreated;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 
 class RegisteredUserController extends Controller
@@ -32,6 +34,8 @@ class RegisteredUserController extends Controller
         $user->role_id = $request->get('role_id');
 
         $user->save();
+
+        Mail::to($user->email)->send(new AccountCreated());
 
         Auth::login($user);
 
