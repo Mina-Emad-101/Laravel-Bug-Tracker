@@ -32,10 +32,13 @@
                             </div>
                         @endif
 
-                        <div class="pb-3 self-end h-20"><strong>Status:</strong><br>{{ $bug->status->name }}
+                        <div class="pb-3 self-end h-20">
+                            <strong>Status:</strong>
+                            <br>
+                            {{ $bug->status->name }}
                         </div>
 
-                        @if (Auth::user()->role_id == 3)
+                        @can('destroy', $bug)
                             <div class="contents">
                                 <form class="contents" method="POST" action="/bugs/{{ $bug->id }}">
                                     @csrf
@@ -44,7 +47,7 @@
                                         class="h-10 text-center font-bold text-lg lg:text-2xl border-2 border-red-500 hover:border-red-500 rounded-lg bg-white hover:bg-red-500 text-red-500 hover:text-red-100">
                                 </form>
                             </div>
-                        @endif
+                        @endcan
                     </div>
                 </a>
             @endforeach

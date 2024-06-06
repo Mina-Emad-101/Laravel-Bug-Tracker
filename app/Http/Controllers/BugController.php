@@ -17,10 +17,6 @@ class BugController extends Controller
      */
     public function index(): View|Redirector|RedirectResponse
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-
         $bugs = Bug::with(['project', 'priority', 'status'])->latest()->orderBy('status_id')->orderBy('priority_id');
 
         if (Auth::user()->role_id == 1) {
@@ -43,8 +39,6 @@ class BugController extends Controller
      */
     public function create(): View
     {
-        Auth::user()->can('create-bug');
-
         return view('bugs.create', ['projects' => Project::all()]);
     }
 
@@ -53,22 +47,20 @@ class BugController extends Controller
      */
     public function store(Request $request): Redirector|RedirectResponse
     {
-        Auth::user()->can('create-bug');
-
         $request->validate([
             'project' => ['required'],
             'description' => ['required', 'max:255'],
             'screenshot' => ['required', 'image'],
         ]);
 
-        $newBug = Bug::create([
-            'project_id' => $request->get('project'),
-            'status_id' => 1,
-            'description' => $request->get('description'),
-            'reporter_id' => $request->get('reporter'),
-            'screenshot' => $request->file('screenshot')->store('screenshots', 'public'),
-            'created_at' => now(),
-        ]);
+        $newBug = new Bug;
+        $newBug->project_id = $request->get('project');
+        $newBug->status_id = 1;
+        $newBug->description = $request->get('description');
+        $newBug->reporter_id = $request->get('reporter');
+        $newBug->screenshot = $request->file('screenshot')->store('screenshots', 'public');
+        $newBug->created_at = now();
+        $newBug->save();
 
         return redirect('/bugs/'.$newBug->id);
     }
@@ -78,26 +70,7 @@ class BugController extends Controller
      */
     public function show(Bug $bug): View
     {
-        Auth::user()->can('show-bug', $bug);
-
         return view('bugs.show', ['bug' => $bug]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Bug $bug): void
-    {
-        Auth::user()->can('edit-bug', $bug);
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Bug $bug): void
-    {
-        Auth::user()->can('edit-bug', $bug);
     }
 
     /**
@@ -105,10 +78,8 @@ class BugController extends Controller
      */
     public function destroy(Bug $bug): Redirector|RedirectResponse
     {
-        Auth::user()->can('destroy-bug', $bug);
-
         $bug->delete();
 
-        return redirect(to: '/bugs');
+        return redirect('/bugs');
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
-    public function create(): View
+    public function create(): View|Redirector|RedirectResponse
     {
         return view('auth.login');
     }
