@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
 
         $user->save();
 
-        Mail::to($user->email)->send(new AccountCreated());
+        Mail::to($user->email)->send(new AccountCreated($user));
 
         Auth::login($user);
 
