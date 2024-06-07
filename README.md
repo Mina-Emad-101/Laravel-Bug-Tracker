@@ -6,6 +6,7 @@
 ### I Already made this app using pure PHP but this Time I'm making it using The Laravel PHP Framework.
 #### I am still working on it, as I'm using this project as a way to learn Laravel, So I'm taking it step-by-step :) 
 #### feel free to take a look at the code!
+#### Update: I have finished making the App!!!
 
 <br>
 
