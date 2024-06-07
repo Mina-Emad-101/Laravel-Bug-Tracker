@@ -42,24 +42,29 @@
                                     </option>
                                 @endforeach
                             </datalist>
-                            <input class="ml-10 w-3/4 lg:w-1/4 rounded-lg border-2 shadow-md" list="staff_ids"
+                            <input class="ml-10 p-1 w-3/4 lg:w-1/4 rounded-lg border-2 shadow-md" list="staff_ids"
                                 name="staff_id" id="staff_id" required>
                             <br>
                             <label class="ml-5" id="priority" name="priority">Select Priority</label>
                             <br>
-                            <select class="ml-10 w-3/4 lg:w-1/4 rounded-lg border-2 shadow-md" id="priority"
+                            <select class="ml-10 p-1 w-3/4 lg:w-1/4 rounded-lg border-2 shadow-md" id="priority"
                                 name="priority_id"
                                 class="rounded-md p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 lg:max-w-xs"
                                 required>
-                                <option value="" selected disabled hidden>-- Select Priority --</option>
+                                <option class="p-1" value="" selected disabled hidden>-- Select Priority --
+                                </option>
                                 @foreach ($priorities as $priority)
-                                    <option value={{ $priority->id }}>{{ $priority->name }}</option>
+                                    <option class="p-1" value={{ $priority->id }}>{{ $priority->name }}</option>
                                 @endforeach
                             </select>
-                            <button type="submit"
-                                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                Assign Bug
-                            </button>
+                            <br>
+                            <br>
+                            <div class="flex justify-center ml-5 w-3/4 lg:w-1/4">
+                                <button type="submit"
+                                    class="rounded-md bg-indigo-600 px-3 py-2 text-md font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    Assign Bug
+                                </button>
+                            </div>
                         @endcan
                     @endif
                 </div>

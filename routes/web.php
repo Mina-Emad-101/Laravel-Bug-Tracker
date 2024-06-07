@@ -52,8 +52,8 @@ Route::get('/bugs/{bug}', [BugController::class, 'show'])
 
 Route::patch('/bugs/{bug}', [BugController::class, 'update'])
     ->where('bug', '[0-9]+')
-    ->middleware('auth');
-// ->can('update', 'bug');
+    ->middleware('auth')
+    ->can('update', 'bug');
 
 Route::get('/bugs/create', [BugController::class, 'create'])
     ->middleware('auth')
