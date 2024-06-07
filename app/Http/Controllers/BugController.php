@@ -19,9 +19,7 @@ class BugController extends Controller
     {
         $bugs = Bug::with(['project', 'priority', 'status'])->latest()->orderBy('status_id')->orderBy('priority_id');
 
-        if (Auth::user()->role_id == 1) {
-            $bugs = $bugs->where(['status_id' => 1]);
-        } elseif (Auth::user()->role_id == 2) {
+        if (Auth::user()->role_id == 2) {
             $bugs = $bugs->where(['assigned_staff_id' => Auth::user()->id]);
         } elseif (Auth::user()->role_id == 3) {
             $bugs = $bugs->where(['reporter_id' => Auth::user()->id]);
