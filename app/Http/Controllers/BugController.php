@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bug;
+use App\Models\Message;
 use App\Models\Priority;
 use App\Models\Project;
 use App\Models\User;
@@ -44,11 +45,14 @@ class BugController extends Controller
             'bug_id' => ['required', 'exists:bugs,id'],
             'staff_id' => ['nullable', 'exists:users,id'],
             'priority_id' => ['nullable', 'exists:priorities,id'],
+            'message' => ['nullable', 'max:255'],
+            'fixed' => ['nullable', 'boolean'],
         ]);
 
         $bug = Bug::find($request->get('bug_id'));
 
-        if ($request->user()->role_id != 1 && $request->user()->is($bug->assigned_staff)) {
+        // Pseudo Policy until i fix the actual policy (Maybe) :)
+        if ($request->user()->role_id != 1 && ! $request->user()->is($bug->assigned_staff)) {
             throw ValidationException::withMessages([
                 'bug_id' => 'You do not have Authorization to update Bug',
             ]);
@@ -56,10 +60,30 @@ class BugController extends Controller
 
         if ($request->get('priority_id')) {
             $bug->priority_id = $request->get('priority_id');
-            $bug->assigned_staff_id = $request->get('staff_id');
             $bug->status_id = 2;
-        } elseif ($request->get('staff_id')) {
+        }
+
+        if ($request->get('staff_id')) {
             $bug->assigned_staff_id = $request->get('staff_id');
+        }
+
+        if ($request->get('message')) {
+            $message = new Message;
+            $message->sender_id = $request->user()->id;
+            $message->receiver_id = $bug->reporter_id;
+            $message->bug_id = $bug->id;
+            $message->content = $request->get('message');
+            $message->created_at = now();
+            $message->save();
+        }
+
+        if ($request->get('fixed') && ! $request->get('message')) {
+            throw ValidationException::withMessages([
+                'bug_id' => 'You have to send a Solution Message if Bug is fixed.',
+            ]);
+        }
+        if ($request->get('fixed')) {
+            $bug->status_id = 3;
         }
 
         $bug->save();
@@ -104,6 +128,9 @@ class BugController extends Controller
     public function show(Bug $bug): View
     {
         $inputs = ['bug' => $bug];
+
+        $messages = Message::where('bug_id', '=', $bug->id)->get();
+        $inputs = array_merge($inputs, ['messages' => $messages]);
 
         if (! $bug->assigned_staff) {
             $staff = User::where('role_id', '=', 2)->get();
