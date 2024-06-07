@@ -37,10 +37,9 @@
 #### Administrator
 <ul>
 	<li>Log into the App ( ✅ )</li>
-	<li>Add Administrators and Staff Members Accounts to App</li>
-	<li>Add Projects to App</li>
+	<li>Add Administrators and Staff Members Accounts to App ( ✅ )</li>
 	<li>View Bugs sent from Customers ( ✅ )</li>
-	<li>Assign Bugs to Staff Members</li>
+	<li>Assign Bugs to Staff Members ( ✅ )</li>
 	<li>Monitor Bug's Case-Flow Details ( ✅ )</li>
 </ul>
 
@@ -49,7 +48,7 @@
 	<li>Log into the App ( ✅ )</li>
 	<li>View Bugs Assigned to Them ( ✅ )</li>
 	<li>Monitor Bug's Case-Flow Details ( ✅ )</li>
-	<li>Send Solution Message to Customer regarding their Bug</li>
+	<li>Send Solution Message to Customer regarding their Bug ( ✅ )</li>
 </ul>
 
 <br>
