@@ -4,7 +4,7 @@
         <x-form class="mx-2" action="/bugs" enctype="multipart/form-data" method="POST">
 
             <x-form-element name="project">
-                <select id="project" name="project"
+                <select id="project" name="project_id"
                     class="rounded-md p-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 lg:max-w-xs"
                     required>
                     <option value="" selected disabled hidden>-- Select a Project --</option>

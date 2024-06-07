@@ -20,6 +20,9 @@
                     <div class="ml-3 flex items-baseline space-x-4 block">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+                        @if (Auth::user() && Auth::user()->role_id == 1)
+                            <x-nav-link href="/users" :active="request()->is('users')">Users</x-nav-link>
+                        @endif
                         @auth
                             <x-nav-link href="/bugs" :active="request()->is('bugs')">Bugs</x-nav-link>
                         @endauth

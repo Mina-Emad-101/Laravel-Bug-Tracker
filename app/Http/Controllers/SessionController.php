@@ -13,7 +13,7 @@ class SessionController extends Controller
 {
     public function create(): View
     {
-        return view('auth.login');
+        return view('users.login');
     }
 
     public function store(Request $request): Redirector|RedirectResponse

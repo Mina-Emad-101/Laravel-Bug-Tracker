@@ -8,4 +8,10 @@
               Report Bug
           </a>
       @endif
+      @if (request()->is('users') && Auth::user()->role_id == 1)
+          <a class="flex justify-center items-center h-3/4 px-4 mr-5 text-lg lg:text-2xl  border-2 border-gray-800 rounded-lg bg-gray-800 hover:bg-white text-gray-300 hover:text-gray-900 text-3xl font-bold"
+              href="/users/create">
+              Add User
+          </a>
+      @endif
   </header>

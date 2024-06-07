@@ -31,8 +31,12 @@ class BugFactory extends Factory
             'assigned_staff_id' => $status->id == 1 ? null : User::where('role_id', 2)->get()->random(),
             'reporter_id' => User::where('role_id', 3)->get()->random(),
             'screenshot' => collect(Storage::disk('public')->files())
-                ->filter(fn ($value, $key) => str_contains($value, '.png') ||
-                        str_contains($value, '.jpg')
+                ->filter(fn ($value, $key) => (
+                    str_contains($value, '.png')
+                    || str_contains($value, '.jpg')
+                )
+                    &&
+                    $value != 'not_image.png'
                 )->random(),
             'created_at' => now(),
         ];

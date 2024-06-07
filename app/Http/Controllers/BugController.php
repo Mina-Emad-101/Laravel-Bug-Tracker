@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bug;
+use App\Models\Priority;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -33,6 +35,32 @@ class BugController extends Controller
     }
 
     /**
+     * Update an instance of the resource.
+     */
+    public function update(Request $request): Redirector|RedirectResponse
+    {
+        $request->validate([
+            'bug_id' => ['required'],
+            'staff_id' => ['nullable', 'exists:users,id'],
+            'priority_id' => ['nullable', 'exists:priorities,id'],
+        ]);
+
+        $bug = Bug::find($request->get('bug_id'));
+
+        if ($request->get('priority_id')) {
+            $bug->priority_id = $request->get('priority_id');
+            $bug->status_id = 2;
+        }
+        if ($request->get('staff_id')) {
+            $bug->assigned_staff_id = $request->get('staff_id');
+        }
+
+        $bug->save();
+
+        return redirect('/bugs/'.$bug->id);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create(): View
@@ -46,13 +74,13 @@ class BugController extends Controller
     public function store(Request $request): Redirector|RedirectResponse
     {
         $request->validate([
-            'project' => ['required'],
+            'project_id' => ['required'],
             'description' => ['required', 'max:255'],
             'screenshot' => ['required', 'image'],
         ]);
 
         $newBug = new Bug;
-        $newBug->project_id = $request->get('project');
+        $newBug->project_id = $request->get('project_id');
         $newBug->status_id = 1;
         $newBug->description = $request->get('description');
         $newBug->reporter_id = $request->get('reporter');
@@ -68,7 +96,17 @@ class BugController extends Controller
      */
     public function show(Bug $bug): View
     {
-        return view('bugs.show', ['bug' => $bug]);
+        $inputs = ['bug' => $bug];
+
+        if (! $bug->assigned_staff) {
+            $staff = User::where('role_id', '=', 2)->get();
+            $priorities = Priority::all();
+
+            $inputs = array_merge($inputs, ['staff' => $staff]);
+            $inputs = array_merge($inputs, ['priorities' => $priorities]);
+        }
+
+        return view('bugs.show', $inputs);
     }
 
     /**
