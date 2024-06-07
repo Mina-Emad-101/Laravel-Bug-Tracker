@@ -30,6 +30,10 @@ class BugPolicy
      */
     public function update(User $user, Bug $bug): bool
     {
+        logger($user);
+        logger($bug);
+        logger(request());
+
         return $user->role_id == 1
             || $bug->assigned_staff?->is($user);
     }

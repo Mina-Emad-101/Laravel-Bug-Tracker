@@ -21,49 +21,57 @@ Route::post('/login', [SessionController::class, 'store'])
 Route::post('/logout', [SessionController::class, 'destroy'])
     ->middleware('auth');
 
-Route::get('/users', [UserController::class, 'index'])
-    ->middleware('auth')
-    ->can('create', User::class);
+// Users
+Route::prefix('users')->group(function () {
 
-Route::get('/users/{user}', [UserController::class, 'show'])
-    ->where('user', '[0-9]+')
-    ->middleware('auth')
-    ->can('show', 'user');
+    Route::get('/', [UserController::class, 'index'])
+        ->middleware('auth')
+        ->can('create', User::class);
 
-Route::get('/users/create', [UserController::class, 'create'])
-    ->middleware('auth')
-    ->can('create', User::class);
+    Route::get('/{user}', [UserController::class, 'show'])
+        ->where('user', '[0-9]+')
+        ->middleware('auth')
+        ->can('show', 'user');
 
-Route::post('/users', [UserController::class, 'store']);
-// ->can('create', User::class);
+    Route::get('/create', [UserController::class, 'create'])
+        ->middleware('auth')
+        ->can('create', User::class);
 
-Route::delete('/users/{user}', [UserController::class, 'destroy'])
-    ->where('user', '[0-9]+')
-    ->middleware('auth')
-    ->can('destroy', 'user');
+    Route::post('/', [UserController::class, 'store'])
+        ->can('create', User::class);
 
-Route::get('/bugs', [BugController::class, 'index'])
-    ->middleware('auth');
+    Route::delete('/{user}', [UserController::class, 'destroy'])
+        ->where('user', '[0-9]+')
+        ->middleware('auth')
+        ->can('destroy', 'user');
+});
 
-Route::get('/bugs/{bug}', [BugController::class, 'show'])
-    ->where('bug', '[0-9]+')
-    ->middleware('auth')
-    ->can('show', 'bug');
+// Bugs
+Route::prefix('bugs')->group(function () {
 
-Route::patch('/bugs/{bug}', [BugController::class, 'update'])
-    ->where('bug', '[0-9]+')
-    ->middleware('auth')
-    ->can('update', 'bug');
+    Route::get('/', [BugController::class, 'index'])
+        ->middleware('auth');
 
-Route::get('/bugs/create', [BugController::class, 'create'])
-    ->middleware('auth')
-    ->can('create', Bug::class);
+    Route::get('/{bug}', [BugController::class, 'show'])
+        ->where('bug', '[0-9]+')
+        ->middleware('auth')
+        ->can('show', 'bug');
 
-Route::post('/bugs', [BugController::class, 'store'])
-    ->middleware('auth')
-    ->can('create', Bug::class);
+    Route::patch('/{bug}', [BugController::class, 'update'])
+        ->where('bug', '[0-9]+')
+        ->middleware('auth');
+    // ->can('update', 'bug');      // For some reason, this doesn't send the request to the BugPolicy:update method
 
-Route::delete('/bugs/{bug}', [BugController::class, 'destroy'])
-    ->where('bug', '[0-9]+')
-    ->middleware('auth')
-    ->can('destroy', 'bug');
+    Route::get('/create', [BugController::class, 'create'])
+        ->middleware('auth')
+        ->can('create', Bug::class);
+
+    Route::post('/', [BugController::class, 'store'])
+        ->middleware('auth')
+        ->can('create', Bug::class);
+
+    Route::delete('/{bug}', [BugController::class, 'destroy'])
+        ->where('bug', '[0-9]+')
+        ->middleware('auth')
+        ->can('destroy', 'bug');
+});

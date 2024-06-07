@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class BugController extends Controller
 {
@@ -40,18 +41,24 @@ class BugController extends Controller
     public function update(Request $request): Redirector|RedirectResponse
     {
         $request->validate([
-            'bug_id' => ['required'],
+            'bug_id' => ['required', 'exists:bugs,id'],
             'staff_id' => ['nullable', 'exists:users,id'],
             'priority_id' => ['nullable', 'exists:priorities,id'],
         ]);
 
         $bug = Bug::find($request->get('bug_id'));
 
+        if ($request->user()->role_id != 1 && $request->user()->is($bug->assigned_staff)) {
+            throw ValidationException::withMessages([
+                'bug_id' => 'You do not have Authorization to update Bug',
+            ]);
+        }
+
         if ($request->get('priority_id')) {
             $bug->priority_id = $request->get('priority_id');
+            $bug->assigned_staff_id = $request->get('staff_id');
             $bug->status_id = 2;
-        }
-        if ($request->get('staff_id')) {
+        } elseif ($request->get('staff_id')) {
             $bug->assigned_staff_id = $request->get('staff_id');
         }
 
