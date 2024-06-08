@@ -17,7 +17,7 @@ class MessageFactory extends Factory
      */
     public function definition(): array
     {
-        $bug = Bug::all()->random();
+        $bug = Bug::where('status_id', '!=', 1)->get()->random();
 
         return [
             'sender_id' => $bug->assigned_staff,

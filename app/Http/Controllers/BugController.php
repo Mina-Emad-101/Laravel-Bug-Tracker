@@ -19,9 +19,9 @@ class BugController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View|Redirector|RedirectResponse
+    public function index(): View
     {
-        $bugs = Bug::with(['project', 'priority', 'status'])->latest()->orderBy('status_id')->orderBy('priority_id');
+        $bugs = Bug::with(['project', 'priority', 'status'])->orderBy('status_id')->orderBy('priority_id');
 
         if (Auth::user()->role_id == 2) {
             $bugs = $bugs->where(['assigned_staff_id' => Auth::user()->id]);
@@ -64,6 +64,11 @@ class BugController extends Controller
         }
 
         if ($request->get('staff_id')) {
+            if (User::find($request->get('staff_id'))->role_id != 2) {
+                throw ValidationException::withMessages([
+                    'staff_id' => "This ID Doesn't belong to a staff member",
+                ]);
+            }
             $bug->assigned_staff_id = $request->get('staff_id');
         }
 
