@@ -7,6 +7,10 @@ use App\Models\Bug;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/.well-known/pki-validation/{pki}', function (string $pki) {
+    return redirect(Storage::url($pki));
+});
+
 Route::view('/', 'home');
 Route::view('/about', 'about');
 
