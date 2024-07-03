@@ -12,7 +12,7 @@
 
 ### Update: I have finished making the App!!!
 
-### You can take a look at it at <a href="mina.sytes.net">mina.sytes.net</a>
+### You can take a look at it at [mina.sytes.net](mina.sytes.net)
 
 <br>
 
