@@ -4,15 +4,7 @@
 
 ### This Bug Tracking Web Application manages Bugs for different Projects.
 
-### I Already made this app using pure PHP but this Time I'm making it using The Laravel PHP Framework.
-
-#### I am still working on it, as I'm using this project as a way to learn Laravel, So I'm taking it step-by-step :)
-
-#### feel free to take a look at the code!
-
-### Update: I have finished making the App!!!
-
-### You can take a look at it at [mina.sytes.net](https://mina.sytes.net)
+### I Already made this app using pure PHP but this Time I created it using The Laravel PHP Framework.
 
 <br>
 
@@ -37,30 +29,30 @@
 #### Customer
 
 <ul>
-	<li>Register Account ( ✅ )</li>
-	<li>Log into the App ( ✅ )</li>
-	<li>Send Bug Details raised from their Software to Administrator Including Screenshot ( ✅ )</li>
-	<li>Monitor Bug's Case-Flow Details ( ✅ )</li>
-	<li>Delete Their Bug ( ✅ )</li>
+	<li>Register Account</li>
+	<li>Log into the App</li>
+	<li>Send Bug Details raised from their Software to Administrator Including Screenshot</li>
+	<li>Monitor Bug's Case-Flow Details</li>
+	<li>Delete Their Bug</li>
 </ul>
 
 #### Administrator
 
 <ul>
-	<li>Log into the App ( ✅ )</li>
-	<li>Add Administrators and Staff Members Accounts to App ( ✅ )</li>
-	<li>View Bugs sent from Customers ( ✅ )</li>
-	<li>Assign Bugs to Staff Members ( ✅ )</li>
-	<li>Monitor Bug's Case-Flow Details ( ✅ )</li>
+	<li>Log into the App</li>
+	<li>Add Administrators and Staff Members Accounts to App</li>
+	<li>View Bugs sent from Customers</li>
+	<li>Assign Bugs to Staff Members</li>
+	<li>Monitor Bug's Case-Flow Details</li>
 </ul>
 
 #### Staff Member
 
 <ul>
-	<li>Log into the App ( ✅ )</li>
-	<li>View Bugs Assigned to Them ( ✅ )</li>
-	<li>Monitor Bug's Case-Flow Details ( ✅ )</li>
-	<li>Send Solution Message to Customer regarding their Bug ( ✅ )</li>
+	<li>Log into the App</li>
+	<li>View Bugs Assigned to Them</li>
+	<li>Monitor Bug's Case-Flow Details</li>
+	<li>Send Solution Message to Customer regarding their Bug</li>
 </ul>
 
 <br>
